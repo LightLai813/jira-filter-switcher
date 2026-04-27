@@ -107,6 +107,8 @@ class CustomFilterStrategy implements FilterStrategy {
   }
 }
 
+const CLEAR_BTN = 'div[data-test-id="filters.ui.filters.clear-button.ak-button"] > button';
+
 export class FilterApplicator {
   private strategies: FilterStrategy[] = [
     new AssigneeFilterStrategy(),
@@ -119,6 +121,9 @@ export class FilterApplicator {
       console.warn('[JFS] No strategy for filter type:', item.type);
       return;
     }
+
+    document.querySelector<HTMLElement>(CLEAR_BTN)?.click();
+
     await strategy.apply(item);
   }
 }
