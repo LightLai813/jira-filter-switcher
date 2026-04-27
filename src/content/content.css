@@ -1,0 +1,297 @@
+/* Panel container */
+.jfs-panel {
+  width: 240px;
+  background: #fff;
+  border: 1px solid #dfe1e6;
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+  overflow: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 14px;
+  color: #172b4d;
+  user-select: none;
+}
+
+/* Toolbar */
+.jfs-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 7px 8px 7px 10px;
+  background: #0052cc;
+  color: #fff;
+  cursor: default;
+}
+
+.jfs-toolbar-title {
+  font-weight: 600;
+  font-size: 13px;
+  flex: 1;
+  cursor: grab;
+}
+
+.jfs-toolbar-title:active {
+  cursor: grabbing;
+}
+
+.jfs-toolbar-actions {
+  display: flex;
+  gap: 2px;
+}
+
+/* Icon buttons in toolbar */
+.jfs-btn {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 3px 5px;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  line-height: 1;
+  transition: background 0.1s;
+}
+
+.jfs-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Panel body */
+.jfs-panel-body {
+  /* scroll container handled by list */
+}
+
+/* Filter list */
+.jfs-filter-list {
+  list-style: none;
+  margin: 0;
+  padding: 4px 0;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.jfs-filter-list::-webkit-scrollbar {
+  width: 4px;
+}
+
+.jfs-filter-list::-webkit-scrollbar-thumb {
+  background: #c1c7d0;
+  border-radius: 2px;
+}
+
+/* Filter item */
+.jfs-filter-item {
+  display: flex;
+  align-items: center;
+  padding: 6px 8px;
+  gap: 7px;
+  cursor: pointer;
+  transition: background 0.1s;
+  border-left: 3px solid transparent;
+  outline: none;
+}
+
+.jfs-filter-item:hover {
+  background: #f4f5f7;
+}
+
+.jfs-filter-item.jfs-active {
+  background: #deebff;
+  border-left-color: #0052cc;
+}
+
+.jfs-filter-item:focus-visible {
+  box-shadow: inset 0 0 0 2px #0052cc;
+}
+
+/* Drag handle */
+.jfs-drag-handle {
+  cursor: grab;
+  color: #b3bac5;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}
+
+.jfs-drag-handle:active {
+  cursor: grabbing;
+}
+
+/* Item name */
+.jfs-item-name {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 13px;
+}
+
+/* Type badge */
+.jfs-item-type {
+  font-size: 10px;
+  padding: 1px 5px;
+  border-radius: 10px;
+  background: #dfe1e6;
+  color: #5e6c84;
+  flex-shrink: 0;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.jfs-active .jfs-item-type {
+  background: #b3d4ff;
+  color: #0052cc;
+}
+
+/* Item action buttons */
+.jfs-item-actions {
+  display: none;
+  gap: 2px;
+  flex-shrink: 0;
+}
+
+.jfs-filter-item:hover .jfs-item-actions {
+  display: flex;
+}
+
+.jfs-item-btn {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 3px 4px;
+  border-radius: 3px;
+  color: #5e6c84;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  transition: background 0.1s, color 0.1s;
+}
+
+.jfs-item-btn:hover {
+  background: #dfe1e6;
+  color: #172b4d;
+}
+
+.jfs-delete-btn:hover {
+  background: #ffebe6;
+  color: #de350b;
+}
+
+/* Drag state */
+.jfs-filter-item.jfs-dragging {
+  opacity: 0.35;
+}
+
+.jfs-filter-item.jfs-insert-before {
+  border-top: 2px solid #0052cc;
+}
+
+.jfs-filter-item.jfs-insert-after {
+  border-bottom: 2px solid #0052cc;
+}
+
+/* Editor */
+.jfs-editor {
+  padding: 10px;
+  border-top: 1px solid #dfe1e6;
+  background: #f4f5f7;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.jfs-editor.jfs-hidden {
+  display: none;
+}
+
+.jfs-editor-title {
+  font-weight: 600;
+  font-size: 11px;
+  color: #5e6c84;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.jfs-input,
+.jfs-select {
+  width: 100%;
+  padding: 5px 8px;
+  border: 2px solid #dfe1e6;
+  border-radius: 3px;
+  font-size: 13px;
+  color: #172b4d;
+  background: #fff;
+  box-sizing: border-box;
+  outline: none;
+  font-family: inherit;
+  transition: border-color 0.1s;
+}
+
+.jfs-input:focus,
+.jfs-select:focus {
+  border-color: #0052cc;
+}
+
+.jfs-editor-actions {
+  display: flex;
+  gap: 6px;
+  justify-content: flex-end;
+  padding-top: 2px;
+}
+
+.jfs-btn-primary {
+  background: #0052cc;
+  color: #fff;
+  border: none;
+  padding: 5px 12px;
+  border-radius: 3px;
+  font-size: 13px;
+  cursor: pointer;
+  font-weight: 500;
+  font-family: inherit;
+  transition: background 0.1s;
+}
+
+.jfs-btn-primary:hover {
+  background: #0065ff;
+}
+
+.jfs-btn-secondary {
+  background: #dfe1e6;
+  color: #172b4d;
+  border: none;
+  padding: 5px 12px;
+  border-radius: 3px;
+  font-size: 13px;
+  cursor: pointer;
+  font-weight: 500;
+  font-family: inherit;
+  transition: background 0.1s;
+}
+
+.jfs-btn-secondary:hover {
+  background: #c1c7d0;
+}
+
+/* Empty state */
+.jfs-empty {
+  padding: 16px;
+  text-align: center;
+  color: #97a0af;
+  font-size: 13px;
+  font-style: italic;
+}
+
+/* Keyboard hint */
+.jfs-hint {
+  padding: 4px 10px;
+  font-size: 10px;
+  color: #97a0af;
+  border-top: 1px solid #f4f5f7;
+  text-align: center;
+  line-height: 1.4;
+}
