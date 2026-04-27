@@ -125,5 +125,8 @@ export class FilterApplicator {
     document.querySelector<HTMLElement>(CLEAR_BTN)?.click();
 
     await strategy.apply(item);
+
+    await new Promise(resolve => setTimeout(resolve, 200));
+    document.body.click();
   }
 }
