@@ -8,6 +8,7 @@ export class DragManager {
 
   attach(listEl: HTMLUListElement, options: DragManagerOptions): void {
     this.listEl = listEl;
+    listEl.addEventListener('mousedown', (e) => this.onMouseDown(e));
     listEl.addEventListener('dragstart', (e) => this.onDragStart(e));
     listEl.addEventListener('dragover', (e) => this.onDragOver(e));
     listEl.addEventListener('drop', (e) => this.onDrop(e, options));
@@ -19,10 +20,14 @@ export class DragManager {
     return (e.target as HTMLElement).closest<HTMLLIElement>('[data-filter-id]');
   }
 
+  private onMouseDown(e: MouseEvent): void {
+    const li = (e.target as HTMLElement).closest<HTMLLIElement>('[data-filter-id]');
+    if (!li) return;
+    li.draggable = !!(e.target as HTMLElement).closest('.jfs-drag-handle');
+  }
+
   private onDragStart(e: DragEvent): void {
-    const handle = (e.target as HTMLElement).closest('.jfs-drag-handle');
-    if (!handle) { e.preventDefault(); return; }
-    const li = handle.closest<HTMLLIElement>('[data-filter-id]');
+    const li = (e.target as HTMLElement).closest<HTMLLIElement>('[data-filter-id]');
     if (!li) return;
     this.dragSrcId = li.dataset.filterId!;
     e.dataTransfer!.effectAllowed = 'move';
@@ -61,7 +66,7 @@ export class DragManager {
     const ids = items.map(el => el.dataset.filterId!);
     const [removed] = ids.splice(srcIdx, 1);
     const insertAt = insertBefore ? destIdx : destIdx + 1;
-    const adjustedIdx = srcIdx < destIdx && !insertBefore ? insertAt - 1 : insertAt;
+    const adjustedIdx = srcIdx < destIdx ? insertAt - 1 : insertAt;
     ids.splice(adjustedIdx < 0 ? 0 : adjustedIdx, 0, removed);
 
     options.onReorder(ids);
@@ -71,6 +76,7 @@ export class DragManager {
     if (this.dragSrcId && this.listEl) {
       const src = this.listEl.querySelector<HTMLLIElement>(`[data-filter-id="${this.dragSrcId}"]`);
       src?.classList.remove('jfs-dragging');
+      if (src) src.draggable = false;
     }
     this.clearIndicators();
     this.dragSrcId = null;

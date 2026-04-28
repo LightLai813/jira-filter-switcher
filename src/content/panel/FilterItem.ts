@@ -13,7 +13,6 @@ export function createFilterItemEl(item: FilterItemData, active: boolean, option
   li.className = 'jfs-filter-item' + (active ? ' jfs-active' : '');
   li.dataset.filterId = item.id;
   li.tabIndex = 0;
-  li.draggable = true;
 
   const handle = document.createElement('span');
   handle.className = 'jfs-drag-handle';

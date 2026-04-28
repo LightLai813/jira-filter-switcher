@@ -79,6 +79,7 @@ export class Panel {
         else this.toggleCollapse();
       },
     });
+
   }
 
   async mount(container: HTMLElement): Promise<void> {
@@ -88,8 +89,18 @@ export class Panel {
     this.render();
 
     document.addEventListener('keydown', (e) => {
-      if (e.altKey && e.shiftKey && e.key === 'J') this.toggleCollapse();
-    });
+      if (e.altKey && e.shiftKey && e.code === 'KeyJ') {
+        e.preventDefault();
+        this.toggleCollapse();
+        return;
+      }
+      if (this.collapsed) return;
+      const tag = (document.activeElement?.tagName ?? '').toLowerCase();
+      if (['input', 'textarea', 'select'].includes(tag) ||
+          !!(document.activeElement as HTMLElement)?.isContentEditable) return;
+      if (e.key === 'ArrowDown') { e.preventDefault(); this.navigateFilter(1); }
+      else if (e.key === 'ArrowUp') { e.preventDefault(); this.navigateFilter(-1); }
+    }, true);
   }
 
   private async loadData(): Promise<void> {
@@ -121,12 +132,22 @@ export class Panel {
     this.filterList.render(this.filters, this.activeFilterId);
   }
 
+  private navigateFilter(direction: 1 | -1): void {
+    if (!this.filters.length) return;
+    const currentIdx = this.filters.findIndex(f => f.id === this.activeFilterId);
+    const nextIdx = currentIdx === -1
+      ? 0
+      : (currentIdx + direction + this.filters.length) % this.filters.length;
+    this.activateFilter(this.filters[nextIdx].id);
+  }
+
   private async activateFilter(id: string): Promise<void> {
     const filter = this.filters.find(f => f.id === id);
     if (!filter) return;
     this.activeFilterId = id;
     await storage.saveActiveFilterId(id);
     this.filterList.render(this.filters, this.activeFilterId);
+    this.keyboard.focusActive(this.activeFilterId);
     await this.applicator.apply(filter);
   }
 
@@ -167,6 +188,10 @@ export class Panel {
     const state = await storage.getPanelState();
     await storage.savePanelState({ ...state, collapsed: this.collapsed });
     this.render();
+    if (!this.collapsed) {
+      if (this.activeFilterId) this.keyboard.focusActive(this.activeFilterId);
+      else this.keyboard.focusFirst();
+    }
   }
 
   private startPanelDrag(e: MouseEvent): void {
