@@ -47,6 +47,7 @@ export class Panel {
 
     this.toolbar = new Toolbar(this.panelEl, {
       onAdd: () => this.openEditor(),
+      onShuffle: () => this.shuffleFilters(),
       onCollapse: () => this.toggleCollapse(),
       onDragStart: (e) => this.startPanelDrag(e),
     });
@@ -170,6 +171,15 @@ export class Panel {
     if (this.activeFilterId === id) {
       this.activeFilterId = null;
       await storage.saveActiveFilterId(null);
+    }
+    await storage.saveFilters(this.filters);
+    this.filterList.render(this.filters, this.activeFilterId);
+  }
+
+  private async shuffleFilters(): Promise<void> {
+    for (let i = this.filters.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [this.filters[i], this.filters[j]] = [this.filters[j], this.filters[i]];
     }
     await storage.saveFilters(this.filters);
     this.filterList.render(this.filters, this.activeFilterId);
