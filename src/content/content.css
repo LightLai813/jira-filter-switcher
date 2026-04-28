@@ -129,6 +129,18 @@
   font-size: 13px;
 }
 
+/* Active tag */
+.jfs-item-active-tag {
+  font-size: 10px;
+  padding: 1px 5px;
+  border-radius: 10px;
+  background: #00875a;
+  color: #fff;
+  flex-shrink: 0;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
 /* Type badge */
 .jfs-item-type {
   font-size: 10px;

@@ -57,6 +57,12 @@ export function createFilterItemEl(item: FilterItemData, active: boolean, option
 
   li.appendChild(handle);
   li.appendChild(name);
+  if (active) {
+    const activeTag = document.createElement('span');
+    activeTag.className = 'jfs-item-active-tag';
+    activeTag.textContent = 'Active';
+    li.appendChild(activeTag);
+  }
   li.appendChild(badge);
   li.appendChild(actions);
 
