@@ -14,7 +14,7 @@ export class Toolbar {
 
     const title = document.createElement('span');
     title.className = 'jfs-toolbar-title';
-    title.textContent = '⚡ Filters';
+    title.innerHTML = `<svg width="13" height="13" viewBox="0 0 16 16" fill="currentColor" style="vertical-align:-2px;margin-right:5px"><path d="M1.5 2.75A.75.75 0 0 1 2.25 2h11.5a.75.75 0 0 1 .56 1.248L9.5 9.12V13.25a.75.75 0 0 1-1.105.66l-2.5-1.5A.75.75 0 0 1 5.5 11.75V9.12L1.69 3.248A.75.75 0 0 1 1.5 2.75z"/></svg>Filters`;
     title.addEventListener('mousedown', (e) => options.onDragStart(e));
 
     const actionsEl = document.createElement('div');
