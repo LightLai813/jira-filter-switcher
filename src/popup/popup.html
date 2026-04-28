@@ -1,43 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>Jira Filter Switcher</title>
-    <link rel="stylesheet" href="./popup.css" />
-  </head>
-  <body>
-    <div id="app">
-      <header class="popup-header">
-        <span class="popup-logo">⚡</span>
-        <h1>Jira Filter Switcher</h1>
-      </header>
 
-      <section class="popup-section">
-        <div class="section-title">Active URL Patterns</div>
-        <div class="section-desc">Panel appears on pages matching these patterns. Use <code>*</code> as wildcard.</div>
-        <div id="url-patterns-container"></div>
-        <div class="add-pattern-row">
-          <input id="new-pattern-input" type="text" placeholder="https://*.atlassian.net/*" class="text-input" />
-          <button id="add-pattern-btn" class="btn-primary btn-sm">Add</button>
-        </div>
-      </section>
+<head>
+  <meta charset="utf-8" />
+  <title>Jira Filter Switcher</title>
+  <link rel="stylesheet" href="./popup.css" />
+</head>
 
-      <section class="popup-section">
-        <div class="section-title">Data</div>
-        <div class="btn-row">
-          <button id="export-btn" class="btn-secondary">Export .json</button>
-          <label class="btn-secondary import-label">
-            Import .json
-            <input id="import-input" type="file" accept=".json" style="display:none" />
-          </label>
-        </div>
-        <div id="import-status" class="status-msg"></div>
-      </section>
+<body>
+  <div id="app">
+    <header class="popup-header">
+      <span class="popup-logo">⚡</span>
+      <h1>Jira Filter Switcher</h1>
+    </header>
 
-      <footer class="popup-footer">
-        <span id="filter-count" class="filter-count"></span>
-      </footer>
-    </div>
-    <script type="module" src="./popup.ts"></script>
-  </body>
+    <section class="popup-section">
+      <div class="section-title">啟用的 URL 規則</div>
+      <div class="section-desc">符合以下規則的頁面會顯示面板，可用 <code>*</code> 作為萬用字元。</div>
+      <div id="url-patterns-container"></div>
+      <div class="add-pattern-row">
+        <input id="new-pattern-input" type="text" placeholder="https://*.atlassian.net/*" class="text-input" />
+        <button id="add-pattern-btn" class="btn-primary btn-sm">新增</button>
+      </div>
+    </section>
+
+    <section class="popup-section">
+      <div class="section-title">資料匯出/匯入</div>
+      <div class="btn-row">
+        <button id="export-btn" class="btn-secondary">匯出 JSON</button>
+        <label class="btn-secondary import-label">
+          匯入 JSON
+          <input id="import-input" type="file" accept=".json" style="display:none" />
+        </label>
+      </div>
+      <div id="import-status" class="status-msg"></div>
+    </section>
+
+    <footer class="popup-footer">
+      <span id="filter-count" class="filter-count"></span>
+    </footer>
+  </div>
+  <script type="module" src="./popup.ts"></script>
+</body>
+
 </html>
