@@ -27,8 +27,14 @@ class AssigneeFilterStrategy implements FilterStrategy {
   async apply(item: FilterItem): Promise<void> {
     const keyword = item.keyword.toLowerCase();
 
-    // Step 1: find a visible checkbox input whose aria-label contains the keyword
-    const fieldset = document.querySelector(ASSIGNEE_FIELDSET);
+    // Step 1: wait for the assignee panel to render, then look for a visible checkbox
+    let fieldset: Element | null = null;
+    try {
+      fieldset = await waitForElement(ASSIGNEE_FIELDSET, 2000);
+    } catch {
+      // panel not present — will attempt show-more fallback
+    }
+
     if (fieldset) {
       const inputs = Array.from(fieldset.querySelectorAll<HTMLInputElement>('input[aria-label]'));
       const match = inputs.find(el => el.getAttribute('aria-label')!.toLowerCase().includes(keyword));
