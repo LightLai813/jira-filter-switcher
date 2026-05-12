@@ -14,21 +14,21 @@
     </header>
 
     <section class="popup-section">
-      <div class="section-title">啟用的 URL 規則</div>
-      <div class="section-desc">符合以下規則的頁面會顯示面板，可用 <code>*</code> 作為萬用字元。</div>
+      <div class="section-title" data-i18n="urlPatternsTitle"></div>
+      <div class="section-desc" data-i18n-html="urlPatternsDesc"></div>
       <div id="url-patterns-container"></div>
       <div class="add-pattern-row">
-        <input id="new-pattern-input" type="text" placeholder="https://*.atlassian.net/*" class="text-input" />
-        <button id="add-pattern-btn" class="btn-primary btn-sm">新增</button>
+        <input id="new-pattern-input" type="text" data-i18n-placeholder="patternPlaceholder" class="text-input" />
+        <button id="add-pattern-btn" class="btn-primary btn-sm" data-i18n="addButton"></button>
       </div>
     </section>
 
     <section class="popup-section">
-      <div class="section-title">資料匯出/匯入</div>
+      <div class="section-title" data-i18n="exportImportTitle"></div>
       <div class="btn-row">
-        <button id="export-btn" class="btn-secondary">匯出 JSON</button>
+        <button id="export-btn" class="btn-secondary" data-i18n="exportButton"></button>
         <label class="btn-secondary import-label">
-          匯入 JSON
+          <span data-i18n="importButton"></span>
           <input id="import-input" type="file" accept=".json" style="display:none" />
         </label>
       </div>

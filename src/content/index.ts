@@ -1,6 +1,6 @@
-import { Panel } from './panel/Panel';
-import { getUrlPatterns } from '../shared/storage';
-import { INJECTED_FLAG } from '../shared/constants';
+import { Panel } from "./panel/Panel";
+import { getUrlPatterns } from "../shared/storage";
+import { INJECTED_FLAG } from "../shared/constants";
 
 declare global {
   interface Window {
@@ -9,7 +9,9 @@ declare global {
 }
 
 function urlMatchesPattern(url: string, pattern: string): boolean {
-  const escaped = pattern.replace(/[.+^${}()|[\]\\]/g, '\\$&').replace(/\*/g, '.*');
+  const escaped = pattern
+    .replace(/[.+^${}()|[\]\\]/g, "\\$&")
+    .replace(/\*/g, ".*");
   try {
     return new RegExp(`^${escaped}$`).test(url);
   } catch {
@@ -23,7 +25,9 @@ async function init(): Promise<void> {
   const patterns = await getUrlPatterns();
   if (!patterns.length) return;
 
-  const matches = patterns.some(p => urlMatchesPattern(window.location.href, p.pattern));
+  const matches = patterns.some((p) =>
+    urlMatchesPattern(window.location.href, p.pattern),
+  );
   if (!matches) return;
 
   window[INJECTED_FLAG] = true;

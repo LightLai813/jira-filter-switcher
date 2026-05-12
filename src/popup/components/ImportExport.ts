@@ -1,6 +1,7 @@
 import type { ExportBundle } from '../../shared/types';
 import { loadAll, saveAll } from '../../shared/storage';
 import { SCHEMA_VERSION } from '../../shared/constants';
+import { t } from '../../shared/i18n';
 
 export class ImportExport {
   constructor(
@@ -29,7 +30,7 @@ export class ImportExport {
     a.download = `jira-filter-switcher-${Date.now()}.json`;
     a.click();
     URL.revokeObjectURL(url);
-    this.setStatus('Exported successfully.', 'success');
+    this.setStatus(t('exportedSuccessfully'), 'success');
   }
 
   private importJson(): void {
@@ -41,7 +42,7 @@ export class ImportExport {
         const json = e.target?.result as string;
         const bundle = JSON.parse(json) as Partial<ExportBundle>;
         if (!bundle.filters || !Array.isArray(bundle.filters)) {
-          throw new Error('Invalid format: missing filters array.');
+          throw new Error(t('invalidFormat'));
         }
         const current = await loadAll();
         await saveAll({
@@ -49,10 +50,10 @@ export class ImportExport {
           filters: bundle.filters,
           urlPatterns: bundle.urlPatterns ?? current.urlPatterns,
         });
-        this.setStatus(`Imported ${bundle.filters.length} filter(s).`, 'success');
+        this.setStatus(t('importedFilters', String(bundle.filters.length)), 'success');
         this.onImported();
       } catch (err) {
-        this.setStatus(`Import failed: ${(err as Error).message}`, 'error');
+        this.setStatus(t('importFailed', (err as Error).message), 'error');
       }
       this.importInput.value = '';
     };

@@ -1,6 +1,7 @@
 import type { FilterItem } from '../../shared/types';
 import { createFilterItemEl } from './FilterItem';
 import { DragManager } from '../drag/DragManager';
+import { t } from '../../shared/i18n';
 
 interface FilterListOptions {
   onActivate: (id: string) => void;
@@ -28,7 +29,7 @@ export class FilterList {
     if (!filters.length) {
       const empty = document.createElement('li');
       empty.className = 'jfs-empty';
-      empty.textContent = 'No filters yet. Click + to add one.';
+      empty.textContent = t('noFiltersYet');
       this.el.appendChild(empty);
       return;
     }

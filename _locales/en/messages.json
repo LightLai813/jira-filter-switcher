@@ -1,0 +1,113 @@
+{
+  "urlPatternsTitle": {
+    "message": "Active URL Patterns"
+  },
+  "urlPatternsDesc": {
+    "message": "Pages matching these patterns will show the panel. Use <code>*</code> as a wildcard."
+  },
+  "patternPlaceholder": {
+    "message": "https://*.atlassian.net/*"
+  },
+  "addButton": {
+    "message": "Add"
+  },
+  "exportImportTitle": {
+    "message": "Export / Import"
+  },
+  "exportButton": {
+    "message": "Export JSON"
+  },
+  "importButton": {
+    "message": "Import JSON"
+  },
+  "noFiltersConfigured": {
+    "message": "No filters configured"
+  },
+  "filtersConfigured": {
+    "message": "$1 filter(s) configured"
+  },
+  "noPatternsMessage": {
+    "message": "No patterns. Panel will not appear anywhere."
+  },
+  "removeButton": {
+    "message": "Remove"
+  },
+  "exportedSuccessfully": {
+    "message": "Exported successfully."
+  },
+  "invalidFormat": {
+    "message": "Invalid format: missing filters array."
+  },
+  "importedFilters": {
+    "message": "Imported $1 filter(s)."
+  },
+  "importFailed": {
+    "message": "Import failed: $1"
+  },
+  "filtersTitle": {
+    "message": "Filters"
+  },
+  "addFilter": {
+    "message": "Add filter"
+  },
+  "shuffleFilters": {
+    "message": "Shuffle filters"
+  },
+  "expand": {
+    "message": "Expand"
+  },
+  "collapse": {
+    "message": "Collapse"
+  },
+  "noFiltersYet": {
+    "message": "No filters yet. Click + to add one."
+  },
+  "filterEditorTitle": {
+    "message": "Filter"
+  },
+  "filterNamePlaceholder": {
+    "message": "Filter name"
+  },
+  "assigneeType": {
+    "message": "Assignee"
+  },
+  "customFilterType": {
+    "message": "Custom Filter"
+  },
+  "keywordPlaceholder": {
+    "message": "Keyword / username"
+  },
+  "cancelButton": {
+    "message": "Cancel"
+  },
+  "saveButton": {
+    "message": "Save"
+  },
+  "editFilterTitle": {
+    "message": "Edit Filter"
+  },
+  "addFilterTitle": {
+    "message": "Add Filter"
+  },
+  "dragToReorder": {
+    "message": "Drag to reorder"
+  },
+  "assigneeLabel": {
+    "message": "Assignee"
+  },
+  "filterLabel": {
+    "message": "Filter"
+  },
+  "editButton": {
+    "message": "Edit"
+  },
+  "deleteButton": {
+    "message": "Delete"
+  },
+  "activeBadge": {
+    "message": "Active"
+  },
+  "keyboardHint": {
+    "message": "↑↓ switch filter · Alt+Shift+J close panel"
+  }
+}

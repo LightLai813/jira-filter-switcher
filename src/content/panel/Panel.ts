@@ -1,6 +1,7 @@
 import panelCss from '../content.css?inline';
 import type { FilterItem } from '../../shared/types';
 import * as storage from '../../shared/storage';
+import { t } from '../../shared/i18n';
 import { Toolbar } from './Toolbar';
 import { FilterList } from './FilterList';
 import { FilterEditor } from './FilterEditor';
@@ -58,7 +59,7 @@ export class Panel {
 
     const hint = document.createElement('div');
     hint.className = 'jfs-hint';
-    hint.textContent = '↑↓ navigate · Enter activate · Alt+Shift+J toggle';
+    hint.textContent = t('keyboardHint');
     this.panelEl.appendChild(hint);
 
     this.filterList = new FilterList(this.bodyEl, {

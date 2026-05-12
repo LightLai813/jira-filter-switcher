@@ -1,4 +1,5 @@
 import type { FilterItem, FilterType } from '../../shared/types';
+import { t } from '../../shared/i18n';
 
 interface FilterEditorOptions {
   onSave: (item: FilterItem) => void;
@@ -7,6 +8,7 @@ interface FilterEditorOptions {
 
 export class FilterEditor {
   private el: HTMLDivElement;
+  private titleEl!: HTMLDivElement;
   private nameInput!: HTMLInputElement;
   private typeSelect!: HTMLSelectElement;
   private keywordInput!: HTMLInputElement;
@@ -20,45 +22,44 @@ export class FilterEditor {
   }
 
   private build(): void {
-    const title = document.createElement('div');
-    title.className = 'jfs-editor-title';
-    title.textContent = 'Filter';
+    this.titleEl = document.createElement('div');
+    this.titleEl.className = 'jfs-editor-title';
 
     this.nameInput = document.createElement('input');
     this.nameInput.type = 'text';
     this.nameInput.className = 'jfs-input';
-    this.nameInput.placeholder = 'Filter name';
+    this.nameInput.placeholder = t('filterNamePlaceholder');
 
     this.typeSelect = document.createElement('select');
     this.typeSelect.className = 'jfs-select';
-    const types: Array<{ value: FilterType; label: string }> = [
-      { value: 'assignee', label: 'Assignee' },
-      { value: 'customFilter', label: 'Custom Filter' },
+    const types: Array<{ value: FilterType; labelKey: string }> = [
+      { value: 'assignee', labelKey: 'assigneeType' },
+      { value: 'customFilter', labelKey: 'customFilterType' },
     ];
-    types.forEach(({ value, label }) => {
+    types.forEach(({ value, labelKey }) => {
       const opt = document.createElement('option');
       opt.value = value;
-      opt.textContent = label;
+      opt.textContent = t(labelKey);
       this.typeSelect.appendChild(opt);
     });
 
     this.keywordInput = document.createElement('input');
     this.keywordInput.type = 'text';
     this.keywordInput.className = 'jfs-input';
-    this.keywordInput.placeholder = 'Keyword / username';
+    this.keywordInput.placeholder = t('keywordPlaceholder');
 
     const actions = document.createElement('div');
     actions.className = 'jfs-editor-actions';
 
     const cancelBtn = document.createElement('button');
     cancelBtn.className = 'jfs-btn-secondary';
-    cancelBtn.textContent = 'Cancel';
+    cancelBtn.textContent = t('cancelButton');
     cancelBtn.type = 'button';
     cancelBtn.addEventListener('click', () => this.options.onCancel());
 
     const saveBtn = document.createElement('button');
     saveBtn.className = 'jfs-btn-primary';
-    saveBtn.textContent = 'Save';
+    saveBtn.textContent = t('saveButton');
     saveBtn.type = 'button';
     saveBtn.addEventListener('click', () => this.submit());
 
@@ -74,7 +75,7 @@ export class FilterEditor {
     actions.appendChild(cancelBtn);
     actions.appendChild(saveBtn);
 
-    this.el.appendChild(title);
+    this.el.appendChild(this.titleEl);
     this.el.appendChild(this.nameInput);
     this.el.appendChild(this.typeSelect);
     this.el.appendChild(this.keywordInput);
@@ -100,8 +101,7 @@ export class FilterEditor {
     this.typeSelect.value = existing?.type ?? 'assignee';
     this.keywordInput.value = existing?.keyword ?? '';
     this.el.classList.remove('jfs-hidden');
-    this.el.querySelector<HTMLElement>('.jfs-editor-title')!.textContent =
-      existing ? 'Edit Filter' : 'Add Filter';
+    this.titleEl.textContent = existing ? t('editFilterTitle') : t('addFilterTitle');
     requestAnimationFrame(() => this.nameInput.focus());
   }
 

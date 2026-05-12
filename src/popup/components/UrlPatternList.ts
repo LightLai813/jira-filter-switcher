@@ -1,5 +1,6 @@
 import type { UrlPattern } from '../../shared/types';
 import { getUrlPatterns, saveUrlPatterns } from '../../shared/storage';
+import { t } from '../../shared/i18n';
 
 export class UrlPatternList {
   private patterns: UrlPattern[] = [];
@@ -23,7 +24,7 @@ export class UrlPatternList {
     if (!this.patterns.length) {
       const empty = document.createElement('div');
       empty.style.cssText = 'font-size:12px;color:#97a0af;font-style:italic;padding:4px 0';
-      empty.textContent = 'No patterns. Panel will not appear anywhere.';
+      empty.textContent = t('noPatternsMessage');
       this.container.appendChild(empty);
       return;
     }
@@ -40,7 +41,7 @@ export class UrlPatternList {
 
       const del = document.createElement('button');
       del.className = 'pattern-del';
-      del.title = 'Remove';
+      del.title = t('removeButton');
       del.textContent = '×';
       del.addEventListener('click', () => this.removePattern(p.id));
 
