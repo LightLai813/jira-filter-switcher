@@ -10,6 +10,7 @@ export interface FilterItem {
 export interface UrlPattern {
   id: string;
   pattern: string;
+  enabled?: boolean;
 }
 
 export interface PanelState {

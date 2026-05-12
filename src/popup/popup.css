@@ -85,6 +85,53 @@ body {
   color: #172b4d;
 }
 
+.pattern-item.disabled .pattern-text {
+  opacity: 0.4;
+}
+
+.pattern-toggle {
+  position: relative;
+  width: 28px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.pattern-toggle input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.pattern-toggle-track {
+  position: absolute;
+  inset: 0;
+  background: #dfe1e6;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.pattern-toggle input:checked + .pattern-toggle-track {
+  background: #0052cc;
+}
+
+.pattern-toggle-track::after {
+  content: '';
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  left: 2px;
+  top: 2px;
+  background: #fff;
+  border-radius: 50%;
+  transition: transform 0.15s;
+}
+
+.pattern-toggle input:checked + .pattern-toggle-track::after {
+  transform: translateX(12px);
+}
+
 .pattern-del {
   border: none;
   background: transparent;

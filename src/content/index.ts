@@ -26,7 +26,7 @@ async function init(): Promise<void> {
   if (!patterns.length) return;
 
   const matches = patterns.some((p) =>
-    urlMatchesPattern(window.location.href, p.pattern),
+    (p.enabled ?? true) && urlMatchesPattern(window.location.href, p.pattern),
   );
   if (!matches) return;
 
