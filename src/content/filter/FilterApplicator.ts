@@ -132,6 +132,10 @@ export class FilterApplicator {
     new CustomFilterStrategy(),
   ];
 
+  clear(): void {
+    document.querySelector<HTMLElement>(CLEAR_BTN)?.click();
+  }
+
   async apply(item: FilterItem): Promise<void> {
     const strategy = this.strategies.find(s => s.canApply(item));
     if (!strategy) {
@@ -139,7 +143,7 @@ export class FilterApplicator {
       return;
     }
 
-    document.querySelector<HTMLElement>(CLEAR_BTN)?.click();
+    this.clear();
 
     await strategy.apply(item);
 

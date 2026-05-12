@@ -144,6 +144,13 @@ export class Panel {
   }
 
   private async activateFilter(id: string): Promise<void> {
+    if (this.activeFilterId === id) {
+      this.activeFilterId = null;
+      await storage.saveActiveFilterId(null);
+      this.applicator.clear();
+      this.filterList.render(this.filters, null);
+      return;
+    }
     const filter = this.filters.find(f => f.id === id);
     if (!filter) return;
     this.activeFilterId = id;
