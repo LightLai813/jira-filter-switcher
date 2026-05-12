@@ -75,8 +75,19 @@ class AssigneeFilterStrategy implements FilterStrategy {
   }
 }
 
-const QUICK_FILTER_BTN = 'span[data-testid="filters.common.ui.list.快速篩選條件-filter"]';
+const QUICK_FILTER_BTN_SELECTORS = [
+  'span[data-testid="filters.common.ui.list.快速篩選條件-filter"]',
+  'span[data-testid="filters.common.ui.list.quick-filters-filter"]',
+];
 const QUICK_FILTER_MENU = 'div[data-testid="filters.common.ui.list.menu-list-wrapper"]';
+
+function getQuickFilterBtn(): HTMLElement | null {
+  for (const sel of QUICK_FILTER_BTN_SELECTORS) {
+    const el = document.querySelector<HTMLElement>(sel);
+    if (el) return el;
+  }
+  return null;
+}
 
 class CustomFilterStrategy implements FilterStrategy {
   canApply(item: FilterItem) { return item.type === 'customFilter'; }
@@ -84,7 +95,7 @@ class CustomFilterStrategy implements FilterStrategy {
   async apply(item: FilterItem): Promise<void> {
     const keyword = item.keyword.toLowerCase();
 
-    const btn = document.querySelector<HTMLElement>(QUICK_FILTER_BTN);
+    const btn = getQuickFilterBtn();
     if (!btn) {
       console.warn('[JFS] Quick filter button not found.');
       return;
