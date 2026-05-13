@@ -65,12 +65,10 @@ export class FilterEditor {
 
     this.nameInput.addEventListener('keydown', (e) => {
       e.stopPropagation();
-      if (e.key === 'Enter') this.submit();
       if (e.key === 'Escape') this.options.onCancel();
     });
     this.keywordInput.addEventListener('keydown', (e) => {
       e.stopPropagation();
-      if (e.key === 'Enter') this.submit();
       if (e.key === 'Escape') this.options.onCancel();
     });
     this.typeSelect.addEventListener('keydown', (e) => e.stopPropagation());
